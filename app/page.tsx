@@ -8,23 +8,21 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { 
-  Truck, 
-  Gift, 
-  Sparkles, 
-  UtensilsCrossed, 
-  Phone, 
-  Instagram, 
-  Mail, 
-  MapPin, 
-  ArrowRight, 
-  CheckCheck, 
-  Loader2, 
-  ImageOff, 
-  Menu, 
-  X, 
-  Heart, 
-  Home
+import {
+  Truck,
+  Gift,
+  Sparkles,
+  UtensilsCrossed,
+  Phone,
+  Instagram,
+  Mail,
+  MapPin,
+  ArrowRight,
+  CheckCheck,
+  Loader2,
+  ImageOff,
+  Menu,
+  X,
 } from 'lucide-react';
 
 const BRAND = {
@@ -37,7 +35,7 @@ const BRAND = {
 };
 
 const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1673407599187-3cd4e340a3c5?q=80&w=1080",
+  hero: "/images/hero.png",
   products: [
     "https://images.unsplash.com/photo-1586854675665-6a575419579d?q=80&w=1080",
     "https://images.unsplash.com/photo-1721831144525-4e2fb1be2665?q=80&w=1080",
@@ -56,7 +54,7 @@ const IMAGES = {
 // --- Hooks ---
 
 const useScrollReveal = (threshold = 0.15) => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -116,14 +114,13 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-primary/95 backdrop-blur-xl py-4 shadow-xl' : 'bg-transparent py-6'
-    }`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-primary/95 backdrop-blur-xl py-4 shadow-xl' : 'bg-transparent py-6'
+      }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#home" className="text-2xl font-black tracking-tighter text-white">
           JUST<span className="text-accent">4</span>KITCHEN
         </a>
-        
+
         <div className="hidden md:flex items-center gap-10">
           {['Essentials', 'Showroom', 'Our Hub'].map((item) => (
             <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-sm font-bold uppercase tracking-widest text-white/70 hover:text-accent transition-colors">
@@ -171,15 +168,14 @@ const Hero = () => {
     <section id="home" className="min-h-screen flex flex-col justify-center bg-primary px-6 overflow-hidden relative">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:64px_64px]" />
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-accent/10 blur-[120px] rounded-full" />
-      
+
       <div className="relative z-10 max-w-6xl mx-auto w-full pt-20">
         <h1 className="font-heading text-[12vw] md:text-[8vw] font-black text-white leading-[0.85] tracking-tighter">
           {typedText}<span className="text-accent animate-pulse">_</span>
         </h1>
-        
+
         <div className="mt-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8 border-t border-white/10 pt-10">
           <div className="max-w-md">
-            <p className="text-accent font-mono text-xs tracking-[0.4em] uppercase mb-4">Ikota Shopping Complex • Ajah</p>
             <p className="text-white/45 text-lg md:text-xl leading-relaxed">
               Discover premium tools and timeless home souvenirs at Lagos&apos; most sophisticated kitchenware retail destination in Ikota.
             </p>
@@ -236,7 +232,7 @@ const Features = () => {
           </div>
           <div className="w-24 h-px bg-accent/40 mb-4" />
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((f, i) => (
             <div key={i} className={`p-10 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 group ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} style={{ transitionDelay: `${i * 120}ms` }}>
@@ -358,23 +354,29 @@ const Testimonials = () => {
   ];
 
   return (
-    <section ref={ref} className="py-28 px-6 bg-accent/5">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-heading text-5xl font-black text-white mb-20">Hostess Reviews</h2>
+    <section ref={ref} className="py-32 px-6 bg-primary relative">
+      <div className="max-w-4xl mx-auto">
+        <div className="sticky top-40 mb-20 text-center">
+          <h2 className="font-heading text-5xl font-black text-white mb-6">Hostess Reviews</h2>
+          <div className="w-20 h-1 bg-accent mx-auto" />
+        </div>
+        
         <div className="space-y-12">
           {items.map((t, i) => (
-            <div key={i} className={`relative py-12 px-10 rounded-[40px] border border-white/10 bg-primary/50 backdrop-blur-md transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-12 blur-sm'}`} style={{ transitionDelay: `${i * 150}ms` }}>
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-accent flex items-center justify-center">
-                <span className="text-primary text-2xl font-black leading-none">&ldquo;</span>
-              </div>
-              <p className="text-white/80 text-2xl italic leading-relaxed mb-8">&ldquo;{t.text}&rdquo;</p>
-              <div className="flex items-center justify-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center text-accent font-black text-xl border border-accent/20">
-                  {t.name.charAt(0)}
+            <div key={i} className="sticky top-60 mb-32">
+              <div className={`relative py-12 px-10 rounded-[40px] border border-white/10 bg-primary/80 backdrop-blur-xl shadow-2xl transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-12 blur-sm'}`} style={{ transitionDelay: `${i * 150}ms` }}>
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-accent flex items-center justify-center shadow-lg">
+                  <span className="text-primary text-2xl font-black leading-none">&ldquo;</span>
                 </div>
-                <div className="text-left">
-                  <p className="font-bold text-white text-lg">{t.name}</p>
-                  <p className="text-accent/60 text-sm font-mono uppercase tracking-widest">{t.role}</p>
+                <p className="text-white text-2xl italic leading-relaxed mb-10 text-center">&ldquo;{t.text}&rdquo;</p>
+                <div className="flex items-center justify-center gap-6">
+                  <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center text-accent font-black text-xl border border-accent/20">
+                    {t.name.charAt(0)}
+                  </div>
+                  <div className="text-left">
+                    <p className="font-bold text-white text-lg tracking-tight">{t.name}</p>
+                    <p className="text-accent/60 text-xs font-mono uppercase tracking-[0.2em]">{t.role}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -496,7 +498,7 @@ const Footer = () => {
             <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-accent hover:border-accent transition-all"><Mail size={18} /></a>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-2 md:grid-cols-3 gap-12 md:gap-24 w-full md:w-auto">
           <div>
             <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-widest">Shop</h4>
